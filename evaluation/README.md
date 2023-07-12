@@ -35,18 +35,6 @@ Options:
 - Simple example: `./bin/main --img ./image.jpg --label ./label_500.pgm --imgScores ./result.png`
 - Example with image scores: `./bin/main --img ./image.jpg --label ./label_100.pgm --imgScores ./result.png --drawScores 1`
 
-## Cite
-If this work was useful for your research, please cite our paper:
-```
-@InProceedings{barcelos2023review,
-  title={A comprehensive review and new taxonomy on superpixel segmentation},
-  author={Barcelos, Isabela Borlido and Bel{\'e}m, Felipe and Melo, Leonardo, JR, Zenilton K. G. do Patroc{\'i}nio, and Falc{\~a}o, Alexandre Xavier and Guimar{\~a}es, Silvio Jamil F},
-  booktitle={ACM Computing Surveys},
-  pages={},
-  year={2023},
-  organization={ACM}
-}
-```
 ## References
 [1] Isabela B Barcelos, Felipe De C Belém, Leonardo De M João, Alexandre X Falcão, and Guimarães Silvio JF. 2022.
 Improving color homogeneity measure in superpixel segmentation assessment. In 2022 35th SIBGRAPI Conference on
