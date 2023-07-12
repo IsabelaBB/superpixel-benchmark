@@ -29,8 +29,7 @@ ones and to categorize the methods according to all existing strategies. This re
 | SCALP    |[Paper](https://doi.org/10.1016/j.cviu.2018.01.006)|[SCALP](https://github.com/rgiraud/scalp)|
 | SEEDS    |[Paper](https://doi.org/10.1007/978-3-642-33786-4_2),[Paper](https://doi.org/10.1007/s11263-014-0744-2)|
 | SH       |[Paper](https://doi.org/10.1109/TIP.2018.2836300)|[SH](https://github.com/semiquark1/boruvka-superpixel)|
-| SICLE    |[Paper](https://doi.org/10.1007/978-3-031-19897-7_21),[Paper](
-https://doi.org/10.48550/arXiv.2204.03533)|[SICLE](https://github.com/LIDS-UNICAMP/SICLE)|
+| SICLE    |[Paper](https://doi.org/10.1007/978-3-031-19897-7_21),[Paper](https://doi.org/10.48550/arXiv.2204.03533)|[SICLE](https://github.com/LIDS-UNICAMP/SICLE)|
 | SLIC     |[Paper](https://doi.org/10.1109/TPAMI.2012.120)|[SLIC](https://www.epfl.ch/labs/ivrl/research/slic-superpixels/)|
 | SNIC     |[Paper](https://openaccess.thecvf.com/content_cvpr_2017/html/Achanta_Superpixels_and_Polygons_CVPR_2017_paper.html)|[SNIC](https://github.com/achanta/SNIC)|
 
