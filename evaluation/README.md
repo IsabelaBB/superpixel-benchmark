@@ -1,6 +1,6 @@
 # Evaluation measures
 
-This code contais the following superpixel evalution measures: Similarity between Image and Reconstruction from Superpixels (SIRS)[1], Boundary Recall (BR)[2], Explained Variation (EV)[3], Undersegmentation Error (UE)[4], and Compactness (CO)[5]. 
+This code contais the following superpixel evaluation measures: Similarity between Image and Reconstruction from Superpixels (SIRS)[1], Boundary Recall (BR)[2], Explained Variation (EV)[3], Undersegmentation Error (UE)[4], and Compactness (CO)[5]. 
 
 ### Requirements
 The project was developed in **C/C++** under a **Linux-based** operational system; therefore, it is **NOT GUARANTEED** to work properly in other systems (_e.g._ Windows and macOS). It's also required to install OpenCV 4.
@@ -30,10 +30,6 @@ Options:
 --recon 	: 	File/Path of image reconstruction. Can be used in SIRS/EV (eval 1 or 2) (optional)
 --save          :       Save image superpixels after enforce coonectivity/minimum number of superpixels. Can be used when enforce connectivity or enforce superpixels' number (eval 6 or 7) (optional)
 ```
-
-**Examples:**
-- Simple example: `./bin/main --img ./image.jpg --label ./label_500.pgm --imgScores ./result.png`
-- Example with image scores: `./bin/main --img ./image.jpg --label ./label_100.pgm --imgScores ./result.png --drawScores 1`
 
 ## References
 [1] Isabela B Barcelos, Felipe De C Belém, Leonardo De M João, Alexandre X Falcão, and Guimarães Silvio JF. 2022.
