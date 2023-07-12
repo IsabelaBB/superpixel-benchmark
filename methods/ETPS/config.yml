@@ -1,0 +1,15 @@
+%YAML:1.0
+
+# Number of superpixels (replaced by the command line parameter --k)
+
+superpixelNum: 0
+batchProcessing: 0
+
+# Energy weights for energy terms in Equation (1) from the paper
+# Set regWeight, lenWeight and sizeWeight to 0 for best results on
+# BSD database (as reported in the paper)
+
+appWeight: 1.0
+regWeight: 1.0
+lenWeight: 1.0
+sizeWeight: 1.0
