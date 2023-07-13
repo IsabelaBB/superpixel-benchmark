@@ -8,7 +8,7 @@ the rapid progress in this area, the literature fails to catch up on more recent
 ones and to categorize the methods according to all existing strategies. This repository allows to evaluate 20 strategies based on nine criteria: connectivity, compactness, delineation, control over the number of superpixels, color homogeneity, robustness, running time, stability, and visual quality. In [1] we provide a comprehensive review with new taxonomy for superpixel segmentation and revisit the recent and popular literature according to our taxonomy. Our experiments show the trends of each approach in pixel clustering and discuss individual trade-offs. 
 
 ## Superpixel methods
-We evaluated 20 superpixel methods and provided the code for each in this repository in [methods](methods/). Be aware that we have adapted these codes to match our system setup, and the benchmark inputs and outputs. Some of these methods require a saliency map (ODISF and SICLE) or a contour prior map (SCALP) to compute superpixels. In [others](others/) folder, we provide the code of [U-2-Net](https://github.com/xuebinqin/U-2-Net)[2] and [Structured Edge Detection Toolbox](https://github.com/pdollar/edges)[3] to compute a saliency map and a contour prior map, repectively. Also, DAL-HERS require a pre-trained model available [here]([https://drive.google.com/file/d/14-uaeMAihLdMepfZAth19T1pfZIoMcaE/view?usp=sharing](https://github.com/hankuipeng/DAL-HERS/tree/master)). The following Table presents the reference paper and code of each method. 
+We evaluated 20 superpixel methods and provided the code for each in this repository in [methods](methods/). Be aware that we have adapted these codes to match our system setup, and the benchmark inputs and outputs. Some of these methods require a saliency map (ODISF and SICLE) or a contour prior map (SCALP) to compute superpixels. In [others](others/) folder, we provide the code of [U-2-Net](https://github.com/xuebinqin/U-2-Net) [2] and [Structured Edge Detection Toolbox](https://github.com/pdollar/edges) [3,4,5] to compute a saliency map and a contour prior map, repectively. Also, DAL-HERS require a pre-trained model available [here]([https://drive.google.com/file/d/14-uaeMAihLdMepfZAth19T1pfZIoMcaE/view?usp=sharing](https://github.com/hankuipeng/DAL-HERS/tree/master)). The following Table presents the reference paper and code of each superpixel method. 
 
 | Method   | Ref. | Code link |
 |----------|------|-----------|
@@ -35,13 +35,47 @@ We evaluated 20 superpixel methods and provided the code for each in this reposi
 
 ## Datasets
 We selected four datasets which impose different challenges for superpixel segmentation:
-[Birds](https://doi.org/10.1109/SIBGRAPI.2016.047); [Insects](https://doi.org/10.1109/SIBGRAPI.2016.047); [Sky](https://doi.org/10.1109/SIBGRAPI.2015.20); and [ECSSD](https://doi.org/10.1109/TPAMI.2015.2465960). Birds has 150 natural images of birds with thin and elongated objects’ parts. Similarly, Insects has 130 images of invertebrates with less
+[Birds](https://doi.org/10.1109/SIBGRAPI.2016.047) [6]; [Insects](https://doi.org/10.1109/SIBGRAPI.2016.047) [6]; [Sky](https://doi.org/10.1109/SIBGRAPI.2015.20) [7]; and [ECSSD](https://doi.org/10.1109/TPAMI.2015.2465960) [8]. Birds has 150 natural images of birds with thin and elongated objects’ parts. Similarly, Insects has 130 images of invertebrates with less
 texture on background regions. Sky has 60 images for sky segmentation with large homogeneous
 regions with subtle luminosity variations. Finally, the Extended Complex Scene Saliency Dataset
 (ECSSD) is composed of 1000 images with objects and backgrounds whose textures are
 complex. 
 
 ## Evaluation measures
-We assess connectivity, compactness, delineation, color homogeneity, robustness, running time, stability, control over the number of superpixels, and visual quality in superpixel segmentation methods. This repository contais our evaluation code ([evaluation](evaluation/README.md)) with five superpixel evaluation measures: Similarity between Image and Reconstruction from Superpixels (SIRS)[1], Boundary Recall (BR)[2], Explained Variation (EV)[3], Undersegmentation Error (UE)[4], and Compactness (CO)[5]. In addition, we provide code to assess running time, control over the number of superpixels, connectivity, and robustness. 
+We assess connectivity, compactness, delineation, color homogeneity, robustness, running time, stability, control over the number of superpixels, and visual quality in superpixel segmentation methods. This repository contais our evaluation code ([evaluation](evaluation/README.md)) with five superpixel evaluation measures: Similarity between Image and Reconstruction from Superpixels (SIRS) [1], Boundary Recall (BR) [9], Explained Variation (EV) [10], Undersegmentation Error (UE) [11], and Compactness (CO) [12]. In addition, we provide code to assess running time, control over the number of superpixels, connectivity, and robustness. 
 
+## Compiling and Running
+- To compile all files: `bash make.sh`
+  - Every method that needs an executable contains a _Makefile_ in its folder and `make.sh` just call each one and call the Makefile in evaluation folder.
+- [Scripts](Scripts/) has bash and python scripts to run saliency/contour maps ([others](Scripts/others/)), segmentation ([Segmentation](Scripts/Segmentation/)), and evaluation ([Evaluation](Scripts/Evaluation/)).  
+
+## References
+[1] Isabela B Barcelos, Felipe De C Belém, Leonardo De M João, Alexandre X Falcão, and Guimarães Silvio JF. 2022. Improving color homogeneity measure in superpixel segmentation assessment. In 2022 35th SIBGRAPI Conference on Graphics, Patterns and Images (SIBGRAPI), Vol. 1. 79–84. https://doi.org/10.1109/SIBGRAPI55357.2022.9991772.
+
+[2] QIN, Xuebin et al. U2-Net: Going deeper with nested U-structure for salient object detection. Pattern recognition, v. 106, p. 107404, 2020.
+
+[3] DOLLÁR, Piotr; ZITNICK, C. Lawrence. Structured forests for fast edge detection. In: Proceedings of the IEEE international conference on computer vision. 2013. p. 1841-1848.
+
+[4] DOLLÁR, Piotr; ZITNICK, C. Lawrence. Fast edge detection using structured forests. IEEE transactions on pattern analysis and machine intelligence, v. 37, n. 8, p. 1558-1570, 2014.
+
+[5] ZITNICK, C. Lawrence; DOLLÁR, Piotr. Edge boxes: Locating object proposals from edges. In: Computer Vision–ECCV 2014: 13th European Conference, Zurich, Switzerland, September 6-12, 2014, Proceedings, Part V 13. Springer International Publishing, 2014. p. 391-405.
+
+[6] Lucy A. C. Mansilla and Paulo A. V. Miranda. 2016. Oriented Image Foresting Transform Segmentation: Connectivity Constraints with Adjustable Width. In 2016 29th SIBGRAPI Conference on Graphics, Patterns and Images (SIBGRAPI).
+289–296. https://doi.org/10.1109/SIBGRAPI.2016.047
+
+[7] Eduardo Barreto Alexandre, Ananda Shankar Chowdhury, Alexandre Xavier Falcao, and Paulo A. Vechiatto Miranda.
+2015. IFT-SLIC: A General Framework for Superpixel Generation Based on Simple Linear Iterative Clustering
+and Image Foresting Transform. In 2015 28th SIBGRAPI Conference on Graphics, Patterns and Images. 337–344.
+https://doi.org/10.1109/SIBGRAPI.2015.20
+
+[8] Jianping Shi, Qiong Yan, Li Xu, and Jiaya Jia. 2015. Hierarchical image saliency detection on extended CSSD. IEEE
+transactions on pattern analysis and machine intelligence 38, 4 (2015), 717–729.
+
+[9] David R Martin, Charless C Fowlkes, and Jitendra Malik. 2004. Learning to detect natural image boundaries using local brightness, color, and texture cues. IEEE transactions on pattern analysis and machine intelligence 26, 5 (2004), 530–549. https://doi.org/10.1109/TPAMI.2004.1273918
+
+[10] Alastair P Moore, Simon JD Prince, Jonathan Warrell, Umar Mohammed, and Graham Jones. 2008. Superpixel lattices. In 2008 IEEE conference on computer vision and pattern recognition. IEEE, 1–8.
+
+[11] Peer Neubert and Peter Protzel. 2012. Superpixel benchmark and comparison. In Proc. Forum Bildverarbeitung, Vol. 6. KIT Scientific Publishing, 1–12.
+
+[12] Alexander Schick, Mika Fischer, and Rainer Stiefelhagen. 2012. Measuring and evaluating the compactness of superpixels. In Proceedings of the 21st international conference on pattern recognition (ICPR2012). IEEE, 930–934.
 
