@@ -3,7 +3,7 @@
 ####################################
 ####### MANDATORY PARAMETERS
 
-declare -a DATASETS=("Birds")
+declare -a DATASETS=("Sky")
 declare -a SUPERPIXELS=("200")
 declare -a MEASURES=("BR" "UE" "SIRS" "EV" "Connectivity")
 declare -a METHODS=("CRS" "DAL-HERS" "DISF" "DRW" "ERGC" "ERS" "ETPS" "GMMSP" "GRID" "IBIS" "ISF" "LNSNet" "LSC" "ODISF" "RSS" "SCALP" "SICLE" "SEEDS" "SH" "SLIC" "SNIC")
