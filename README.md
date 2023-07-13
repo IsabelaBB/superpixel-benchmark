@@ -45,9 +45,22 @@ complex.
 We assess connectivity, compactness, delineation, color homogeneity, robustness, running time, stability, control over the number of superpixels, and visual quality in superpixel segmentation methods. This repository contais our evaluation code ([evaluation](evaluation/README.md)) with five superpixel evaluation measures: Similarity between Image and Reconstruction from Superpixels (SIRS) [1], Boundary Recall (BR) [9], Explained Variation (EV) [10], Undersegmentation Error (UE) [11], and Compactness (CO) [12]. In addition, we provide code to assess running time, control over the number of superpixels, connectivity, and robustness. 
 
 ## Compiling and Running
-- To compile all files: `bash make.sh`
-  - Every method that needs an executable contains a _Makefile_ in its folder and `make.sh` just call each one and call the Makefile in evaluation folder.
-- [Scripts](Scripts/) has bash and python scripts to run saliency/contour maps ([others](Scripts/others/)), segmentation ([Segmentation](Scripts/Segmentation/)), and evaluation ([Evaluation](Scripts/Evaluation/)).  
+- To **compile** all files: `bash make.sh`
+  - Every method that needs an executable file contains a _Makefile_ in its folder. `make.sh` just call each one and call the Makefile in evaluation folder.
+- [Scripts](Scripts/) has bash and python scripts to run saliency/contour maps ([others](Scripts/others/)), segmentation ([Segmentation](Scripts/Segmentation/)), and evaluation ([Evaluation](Scripts/Evaluation/)).
+- To run **segmentation**, execute `bash run_segmentation.sh` ([run_segmentation.sh](Scripts/Segmentation/run_segmentation.sh)).
+    - The folder [Methods](Scripts/Segmentation/Methods) has scripts for each method.
+    - One may specify the methods, datasets, directories and parameters in `run_segmentation.sh`.
+    - Similarly, one can generate segmentation for images with average blur or salt and peper noise. 
+- To generate **segmentation** for images with average blur or salt and peper **noise**:
+  - Run `python3 add_noise.py` ([add_noise.py](Scripts/Evaluation/add_noise.py)) to generate noised images
+  - Then, generate the segmentations by running `run_segmentation_robustness.sh` ([run_segmentation_robustness.sh](Scripts/Segmentation/run_segmentation_robustness.sh)).
+  - One may specify the methods, datasets, directories and parameters in `run_segmentation_robustness.sh`.
+- To **evaluate**:
+  - Run `bash run_eval.sh` ([run_eval.sh](Scripts/Evaluation/run_eval.sh)) to assess BR, UE, SIRS, EV, CO, superpiixel connectivity, and the control over the superpixel number.
+  - Run `bash run_eval_robustness.sh` ([run_eval.sh](Scripts/Evaluation/run_eval_robustness.sh)) to assess BR, UE, SIRS, EV, CO, superpiixel connectivity, and the control over the superpixel number in the noised images.
+  - Run `python3 eval_stability.py` ([eval_stability.py](Scripts/Evaluation/eval_stability.py)) to assess the stability of superpixel evaluation.
+
 
 ## References
 [1] Isabela B Barcelos, Felipe De C Belém, Leonardo De M João, Alexandre X Falcão, and Guimarães Silvio JF. 2022. Improving color homogeneity measure in superpixel segmentation assessment. In 2022 35th SIBGRAPI Conference on Graphics, Patterns and Images (SIBGRAPI), Vol. 1. 79–84. https://doi.org/10.1109/SIBGRAPI55357.2022.9991772.
