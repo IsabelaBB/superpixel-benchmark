@@ -24,11 +24,7 @@ EVALUATION_DIR="${RESULTS_DIR}/Eval"
 cd ../../methods/
 
 runMethod () {
-	if [ "$METHOD_NAME" == 'CRS' ] || [ "$METHOD_NAME" = 'ERGC' ] || [ "$METHOD_NAME" = 'SEEDS' ]; then
-		cd stutz_bench
-	else
-		cd $METHOD_NAME
-	fi
+	cd $METHOD_NAME
 	
 	PARAMS="${DATASET_DIR}/${DS_NAME}/${NOISE_FOLDER}/${NOISE} "
 	PARAMS+="${superpixels} "

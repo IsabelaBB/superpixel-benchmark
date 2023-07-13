@@ -7,13 +7,10 @@ import os.path
 #parser.add_argument('--input',help='The path of the source image')
 #parser.add_argument('--output', help='The path of the labeled image')
 
-#DATASETS = ['Birds', 'Sky', 'ECSSD', 'Insects']
+DATASETS = ['Sky']
 METHODS = ['CRS', 'DAL-HERS', 'DISF', 'DRW', 'ERGC', 'ERS', 'ETPS', 'GMMSP', 'GRID', 'IBIS', 'ISF', 'LNSNet', 'LSC', 'ODISF', 'RSS', 'SCALP', 'SEEDS', 'SH', 'SLIC','SNIC', 'SICLE']
 METRICS = ['BR', 'UE', 'EV', 'SIRS']
-#SPXS = [25,50,75,100,200,300,400,500,600,700,800,900,1000]
-
-DATASETS = ['test10']
-SPXS = [50,100]
+SPXS = [200]
 
 OUTPUT_PATH="../../RESULTS/Eval"
 INUT_PATH="../../RESULTS/Eval"
