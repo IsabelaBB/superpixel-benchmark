@@ -5,11 +5,11 @@ declare -a METHODS_FOLDER=("SEEDS" "CRS" "ERGC" "DAL-HERS" "DISF" "DRW" "ERS" "E
 cd methods
 for METHOD_NAME in ${METHODS_FOLDER[@]}; do
 	echo "### ${METHOD_NAME} ###"
-	cd ${METHOD_NAME}; make clean; #make; 
+	cd ${METHOD_NAME}; make clean; make; 
 	cd ..
 done
 cd ..
 
-cd evaluation; make clean; #make; 
+cd evaluation; make clean; make; 
 cd ..
 
