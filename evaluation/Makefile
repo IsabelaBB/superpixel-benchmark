@@ -75,6 +75,7 @@ obj: \
 	$(OBJ_DIR)/Color.o \
 	$(OBJ_DIR)/PrioQueue.o \
 	$(OBJ_DIR)/Image.o \
+	$(OBJ_DIR)/Eval.o \
 	$(OBJ_DIR)/ift.o 
 	
 
