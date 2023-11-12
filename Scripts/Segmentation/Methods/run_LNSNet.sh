@@ -25,7 +25,7 @@ else
 	    PARAMS+="--time ${TIME_FILE} "
 	fi
 	
-	python3 ./LNSNet.py ${PARAMS}
+	pipenv run python3 ./LNSNet.py ${PARAMS}
 	
 fi
 

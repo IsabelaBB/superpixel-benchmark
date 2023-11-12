@@ -1,8 +1,10 @@
 #! /bin/bash
 
-declare -a DATASETS=("Sky")
-declare -a SUPERPIXELS=("200")
-declare -a METHODS=("CRS" "DAL-HERS" "DISF" "DRW" "ERGC" "ERS" "ETPS" "GMMSP" "GRID" "IBIS" "ISF" "LNSNet" "LSC" "ODISF" "RSS" "SCALP" "SICLE" "SEEDS" "SH" "SLIC" "SNIC")
+declare -a DATASETS=("Birds")
+declare -a SUPERPIXELS=("400")
+#declare -a METHODS=("AINET" "CRS" "DAL-HERS" "DISF" "DRW" "ERGC" "ERS" "ETPS" "GMMSP" "GRID" "IBIS" "ISF" "LNSNet" "LSC" "ODISF" "RSS" "SCALP" "SICLE" "SEEDS" "SH" "SIN" "SLIC" "SNIC" "SSFCN")
+declare -a METHODS=("SIN" "SSFCN")
+
 
 ROBUSTNESS_FOLDER="Robustness"
 declare -a NOISE_BLUR=("5" "9" "13" "17")

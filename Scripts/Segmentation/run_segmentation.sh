@@ -1,8 +1,13 @@
 #! /bin/bash
 
-declare -a DATASETS=("Sky")
-declare -a SUPERPIXELS=("200")
-declare -a METHODS=("CRS" "DAL-HERS" "DISF" "DRW" "ERGC" "ERS" "ETPS" "GMMSP" "GRID" "IBIS" "ISF" "LNSNet" "LSC" "ODISF" "RSS" "SCALP" "SICLE" "SEEDS" "SH" "SLIC" "SNIC")
+declare -a DATASETS=("Birds")
+#declare -a DATASETS=("ECSSD" "Birds" "Insects" "Sky" "NYUV2" "SUBRGBD")
+
+#declare -a SUPERPIXELS=("25" "50" "75" "100" "200" "300" "400" "500" "600" "700" "800" "900" "1000")
+declare -a SUPERPIXELS=("100" "200" "300" "400" "600" "700" "800" "900")
+
+#declare -a METHODS=("AINET" "CRS" "DAL-HERS" "DISF" "DRW" "ERGC" "ERS" "ETPS" "GMMSP" "GRID" "IBIS" "ISF" "LNSNet" "LSC" "ODISF" "RSS" "SCALP" "SEEDS" "SH" "SICLE" "SIN" "SLIC" "SNIC" "SSFCN")
+declare -a METHODS=("LNSNet")
 
 SCRIPTS_PATH="Scripts/Segmentation/Methods"
 DATASET_DIR="../../datasets/"

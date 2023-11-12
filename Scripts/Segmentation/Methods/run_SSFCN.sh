@@ -11,7 +11,7 @@ else
 	
 	PARAMS="--img ${DS_PATH} "
 	PARAMS+="--k ${superpixels} "
-	PARAMS+="--pretrained ./pretrained/DAL_loss=bce-rgb_date=23Feb2021.tar "
+	PARAMS+="--pretrained ./pretrain_ckpt/SpixelNet_bsd_ckpt.tar "
 	
 	if [[ "$RESULTS_PATH" != "-1" ]]; then
 	    PARAMS+="--label ${RESULTS_PATH} "
@@ -25,7 +25,7 @@ else
 	    PARAMS+="--time ${TIME_FILE} "
 	fi
 	
-	pipenv run python3 ./DAL-HERS.py ${PARAMS}
+	pipenv run python3 ./ssfcn.py ${PARAMS}
 	
 fi
 
