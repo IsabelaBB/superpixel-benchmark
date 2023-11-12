@@ -48,7 +48,7 @@ parser.add_argument('--border', default=None, help='The path of the borders imag
 parser.add_argument('--k', default=None, help='Number of superpixels')
 parser.add_argument('--dtime', default=None, help='Time log')
 parser.add_argument('--time', default=None, help='Time log')
-parser.add_argument('--edge', default=False, help='whether to incorporate edge information')
+parser.add_argument('--edge', default=True, help='whether to incorporate edge information')
 parser.add_argument('--device', default=torch.device("cuda" if torch.cuda.is_available() else "cpu"), help='default device (CPU / GPU)')
 args = parser.parse_args()
 
@@ -150,7 +150,7 @@ def DALHERS(img, edge, img_file, model):
     ## HED edge information 
     if edge:
         Input = torch.FloatTensor(np.ascontiguousarray(np.array(Image.open(img_file))[:, :, ::-1].transpose(2, 0, 1).astype(np.float32)))*(1.0 / 255.0)
-        edge_prob = estimate(Input) 
+        edge_prob = estimate(Input).cpu()
         input_edge = np.array(edge_prob.squeeze(0), dtype=data_type)
     else:
         input_edge = np.ones((h, w), dtype=data_type) # Provide no external edge information by default 

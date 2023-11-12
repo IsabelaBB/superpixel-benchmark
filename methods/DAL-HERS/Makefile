@@ -3,7 +3,6 @@ BLD = pybuild
 
 default: all
 
-
 CXXFLAGS=-std=c++11
 
 tocopy=setup.py boruvka_superpixel_wrap.pxd boruvka_superpixel_wrap.pyx \
@@ -14,9 +13,13 @@ all: module
 builddir:
 	mkdir -p $(BLD)
 
-module: builddir
+pipmodule: 
+	pipenv install
+	pipenv sync
+	
+module: builddir pipmodule
 	cp $(addprefix $(SRC)/,$(tocopy)) $(BLD)
-	cd $(BLD); python3 setup.py build_ext --inplace
+	cd $(BLD); pipenv run python3 setup.py build_ext --inplace ; exit
 
 $(BLD)/hers_superpixel.o: builddir \
 		$(SRC)/boruvka_superpixel.h $(SRC)/boruvka_superpixel.cpp
