@@ -1,6 +1,6 @@
 #! /bin/bash
 
-declare -a DATASETS=("Sky")
+declare -a DATASETS=("NYUV2")
 
 DATASET_DIR="../../datasets/"
 EDGEMAP_CODE="../../others/edgeDetection/"

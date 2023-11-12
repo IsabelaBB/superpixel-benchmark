@@ -1,6 +1,6 @@
 #! /bin/bash
 
-declare -a DATASETS=("Sky")
+declare -a DATASETS=("NYUV2")
 
 DATASET_DIR="../../datasets/"
 SALIENCYMAP_CODE="../../others/U-2-Net/"
@@ -8,7 +8,7 @@ SALIENCYMAP_RESULT="../../others/SaliencyMaps/"
 
 MODEL="${SALIENCYMAP_CODE}/saved_models/u2net/u2net"
 IMG_FOLDER="images"
-DEVICE="cuda"
+DEVICE="cpu"
 
 ################################################################
 
