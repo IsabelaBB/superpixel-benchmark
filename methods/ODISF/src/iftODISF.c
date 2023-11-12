@@ -761,7 +761,7 @@ void iftDestroyODISF
   #endif //------------------------------------------------------------------//
   iftDestroyMImage(&((*odisf)->mimg));
   if((*odisf)->mask != NULL) iftDestroyBMap(&((*odisf)->mask));
-  if((*odisf)->saliency != NULL) free((*odisf)->mask);
+  if((*odisf)->saliency != NULL) free((*odisf)->saliency);
   
   free(*odisf);
   (*odisf) = NULL;
@@ -903,10 +903,11 @@ iftImage *iftRunODISF
       fprintf(stderr, "iftRunODISF: Ni = %d\n", ni);
       #endif //--------------------------------------------------------------//
       // Select the Ni relevant seeds (and remove the others)
-      if(old_seeds != NULL) iftDestroyIntArray(&old_seeds);
+      //if(old_seeds != NULL) iftDestroyIntArray(&old_seeds);
       old_seeds = seeds;
 
       seeds = _iftRemSeeds(odisf, ni, iftdata, old_seeds);
+      iftDestroyIntArray(&old_seeds);
       iter++;
     }
   }

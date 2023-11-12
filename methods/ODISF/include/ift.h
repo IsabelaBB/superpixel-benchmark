@@ -50,6 +50,7 @@ typedef unsigned char  uchar;
 typedef unsigned short ushort;
 typedef unsigned int   uint;
 typedef unsigned long  ulong;
+
 #ifndef  __cplusplus
 typedef long long llong;
 typedef unsigned long long ullong;
@@ -418,6 +419,7 @@ void iftWriteImageP6(const iftImage *img, const char *filename, ...);
 void iftWriteImageP2(const iftImage *img, const char *filename, ...);
 void iftWriteImagePNG(const iftImage* img, const char* format, ...);
 void iftWriteImageJPEG(const iftImage* img, const char* format, ...);
+
 int iftMaximumValueInRegion(const iftImage *img, iftBoundingBox bb);
 void iftSetImage(iftImage *img, int value);
 void  iftSetAlpha(iftImage *img, ushort value);
@@ -427,6 +429,7 @@ uchar iftImageDepth(const iftImage* img);
 static inline long iftMaxImageRange(uchar img_depth) {
     return (1L << (img_depth)) - 1; // 2^img_depth -1
 }
+
 void iftMinMaxValues(const iftImage *img, int *min, int *max);
 iftImage *iftCreateImageFromImage(const iftImage *src);
 iftImage *iftCreateColorImage(int xsize, int ysize, int zsize, int depth);
@@ -673,4 +676,7 @@ void iftConvertNewBitDepth
 iftBMap *iftGetBorderMap
 (const iftImage *label);
 
+#ifdef __cplusplus
+}
+#endif
 #endif // _IFT_H_

@@ -2802,20 +2802,20 @@ void iftVerifyImageDomains(const iftImage *img1, const iftImage *img2, const cha
     }
 }
 
-uchar iftImageDepth(const iftImage *img) 
-{
-    int img_min, img_max;
-    iftMinMaxValues(img, &img_min, &img_max);
-    
-    long max_range;
+    uchar iftImageDepth(const iftImage *img) 
+    {
+        int img_min, img_max;
+        iftMinMaxValues(img, &img_min, &img_max);
+        
+        long max_range;
 
-    if (img_min >= 0)
-        max_range = iftNormalizationValue(img_max) + 1;
-    else
-        max_range = iftNormalizationValue(img_max - img_min) + 1;
-    
-    return (uchar) iftLog(max_range, 2);
-}
+        if (img_min >= 0)
+            max_range = iftNormalizationValue(img_max) + 1;
+        else
+            max_range = iftNormalizationValue(img_max - img_min) + 1;
+        
+        return (uchar) iftLog(max_range, 2);
+    }
 
 void iftMinMaxValues(const iftImage *img, int *min, int *max) 
 {

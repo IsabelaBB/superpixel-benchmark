@@ -196,7 +196,7 @@ void runDirectory(iftArgs *args)
 
     int numImages = n;
     double sum_time = 0;
-    const char *out_dir = NULL;
+    const char *out_dir;
     const char *mask_dir;
     const char *objsm_dir;
     const char *dfile_time;
@@ -205,26 +205,23 @@ void runDirectory(iftArgs *args)
 
     if (iftExistArg(args, "out") == true)
       out_dir = iftGetArg(args, "out");
-    else
-      out_dir = NULL;
+    else out_dir = NULL;
 
     if (iftExistArg(args, "objsm") == true)
       objsm_dir = iftGetArg(args, "objsm");
-    else
-      objsm_dir = NULL;
+    else objsm_dir = NULL;
 
     if (iftExistArg(args, "sampl-op") == true)
       sampling = iftGetArg(args, "sampl-op");
+    else sampling = NULL;
 
     if (iftExistArg(args, "mask") == true)
       mask_dir = iftGetArg(args, "mask");
-    else
-      mask_dir = NULL;
+    else mask_dir = NULL;
 
     if (iftExistArg(args, "dtime") == true)
       dfile_time = iftGetArg(args, "dtime");
-    else
-      dfile_time = NULL;
+    else dfile_time = NULL;
 
     if (iftExistArg(args, "n0") == true)
       n0 = atoi(iftGetArg(args, "n0"));
@@ -236,7 +233,7 @@ void runDirectory(iftArgs *args)
     {
       // get image name
       sprintf(image_name, "%s/%s", path, namelist[n]->d_name);
-
+      
       // alloc structures
       iftArgs *args_local;
       const char *LABEL_PATH;
@@ -253,7 +250,7 @@ void runDirectory(iftArgs *args)
       int idx = 0;
 
       argv[idx] = (char *)malloc(255 * sizeof(char));
-      strcpy(argv[idx], "--img");
+      sprintf(argv[idx], "--img");
       idx++;
       argv[idx] = (char *)malloc(255 * sizeof(char));
       sprintf(argv[idx], "%s", image_name);
@@ -290,21 +287,21 @@ void runDirectory(iftArgs *args)
 
       idx++;
       argv[idx] = (char *)malloc(255 * sizeof(char));
-      strcpy(argv[idx], "--sampl-op");
+      sprintf(argv[idx], "--sampl-op");
       idx++;
       argv[idx] = (char *)malloc(255 * sizeof(char));
       sprintf(argv[idx], "%s", sampling);
 
       idx++;
       argv[idx] = (char *)malloc(255 * sizeof(char));
-      strcpy(argv[idx], "--n0");
+      sprintf(argv[idx], "--n0");
       idx++;
       argv[idx] = (char *)malloc(255 * sizeof(char));
       sprintf(argv[idx], "%d", n0);
 
       idx++;
       argv[idx] = (char *)malloc(255 * sizeof(char));
-      strcpy(argv[idx], "--nf");
+      sprintf(argv[idx], "--nf");
       idx++;
       argv[idx] = (char *)malloc(255 * sizeof(char));
       sprintf(argv[idx], "%d", nf);
@@ -366,8 +363,7 @@ void runDirectory(iftArgs *args)
       fprintf(fp, "%d %.6f\n", superpixels, sum_time / (double)numImages);
       fclose(fp);
     }
-    iftDestroyArgs(&args);
-
+    
     free(image_name);
     free(namelist);
     // ************************
