@@ -389,7 +389,6 @@ void IBIS::init() {
         }
 
     }
-
 }
 
 void IBIS::reset() {
@@ -566,7 +565,7 @@ void IBIS::mask_propagate_SP() {
 
 // ------------------------------------------------------------------------------- IBIS::MASK
 
-void IBIS::MASK::init( int size_in, int y_in, int x_in, int mask_level, IBIS* ptr_IBIS ) {
+void IBIS::MASK::init( int size_in, int y_in, int x_in, int mask_level, IBIS* ptr_IBIS ) { // 2^8 , 580, 709, 8
     IBIS_data = ptr_IBIS;
 
     x_var = new int[ size_in ];
@@ -596,7 +595,6 @@ void IBIS::MASK::init( int size_in, int y_in, int x_in, int mask_level, IBIS* pt
         sub_mask[1].init( pow(2.0, mask_index+1), y - pow(2.0, mask_index-1), x + pow(2.0, mask_index-1), mask_index-1, IBIS_data );
         sub_mask[2].init( pow(2.0, mask_index+1), y + pow(2.0, mask_index-1), x - pow(2.0, mask_index-1), mask_index-1, IBIS_data );
         sub_mask[3].init( pow(2.0, mask_index+1), y + pow(2.0, mask_index-1), x + pow(2.0, mask_index-1), mask_index-1, IBIS_data );
-
     }
     else {
         last_parent = new int[4];
@@ -634,12 +632,10 @@ void IBIS::MASK::init( int size_in, int y_in, int x_in, int mask_level, IBIS* pt
             }
 
         }
-
     }
 
     // fill mask coordinates
     generate_mask();
-
 }
 
 IBIS::MASK::~MASK() {
