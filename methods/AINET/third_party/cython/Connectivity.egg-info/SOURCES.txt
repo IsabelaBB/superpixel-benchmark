@@ -1,0 +1,6 @@
+connectivity.c
+setup.py
+Connectivity.egg-info/PKG-INFO
+Connectivity.egg-info/SOURCES.txt
+Connectivity.egg-info/dependency_links.txt
+Connectivity.egg-info/top_level.txt
