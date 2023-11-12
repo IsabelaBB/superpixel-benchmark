@@ -1,14 +1,17 @@
 #! /bin/bash
 
+if [ "$#" -lt 3 ]; then
+    echo "Illegal number of parameters"
+else
+
 ####################################
 ####### MANDATORY PARAMETERS
 
-declare -a DATASETS=("Birds") # dataset
-declare -a SUPERPIXELS=("400") # number of superpixels
-declare -a MEASURES=("BR" "UE" "SIRS" "EV" "Connectivity") # evaluation measures
+METHOD_NAME=$1 # Name of the method to evaluate
+MEASURE_NAME=$2 # Evaluation measures. Use one of the following: "BR" "UE" "SIRS" "EV" "CO" "Connectivity" "SuperpixelNumber"
+DS_NAME=$3 # Name of the dataset to evaluate
 
-# superpixel methods
-declare -a METHODS=("AINET" "CRS" "DAL-HERS" "DISF" "DRW" "ERGC" "ERS" "ETPS" "GMMSP" "GRID" "IBIS" "ISF" "LNSNet" "LSC" "ODISF" "RSS" "SCALP" "SEEDS" "SH" "SICLE" "SIN" "SLIC" "SNIC" "SSFCN")
+declare -a SUPERPIXELS=("400") # number of superpixels
 
 # folders and noise and blur values
 ROBUSTNESS_FOLDER="Robustness"
@@ -65,7 +68,7 @@ runMetric () {
 # GET THE LABELED IMAGE EXTENSION
 getExt () {
 	declare -a PGM_METHODS=("CRS" "DAL-HERS" "DISF" "DRW" "ERGC" "ERS" "GMMSP" "GRID" "IBIS" "ISF" "LSC" "ODISF" "RSS" "SEEDS" "SH" "SLIC" "SICLE")
-	declare -a PNG_METHODS=("ETPS" "LNSNet" "SCALP" "SNIC")
+	declare -a PNG_METHODS=("ETPS" "LNSNet" "SCALP" "SNIC" "AINET" "SIN" "SSFCN")
 	
 	if [[ " ${PGM_METHODS[@]} " =~ " ${METHOD_NAME} " ]]; then
 		EXT="pgm"
@@ -134,34 +137,21 @@ getParams() {
 }
 
 
-for DS_NAME in ${DATASETS[@]}; do
-	for superpixels in ${SUPERPIXELS[@]}; do
-
-		for NOISE in ${NOISE_BLUR[@]}; do
-			NOISE_FOLDER="${BLUR_FOLDER}"
-		    	
-		    	for METHOD_NAME in ${METHODS[@]}; do
-				getExt
-				for MEASURE_NAME in ${MEASURES[@]}; do
-					PARAMS="--ext ${EXT} "
-					getParams
-					runMetric
-				done
-			done
-		done
+for superpixels in ${SUPERPIXELS[@]}; do
+	for NOISE in ${NOISE_BLUR[@]}; do
+		NOISE_FOLDER="${BLUR_FOLDER}"    	
+		getExt	
+		PARAMS="--ext ${EXT} "
+		getParams
+		runMetric
+	done
 		
-		for NOISE in ${NOISE_SP[@]}; do
-			NOISE_FOLDER="${SP_FOLDER}"
-		    	
-		    	for METHOD_NAME in ${METHODS[@]}; do
-				getExt
-				for MEASURE_NAME in ${MEASURES[@]}; do
-					PARAMS="--ext ${EXT} "
-					getParams
-					runMetric
-				done
-			done
-		done
+	for NOISE in ${NOISE_SP[@]}; do
+		NOISE_FOLDER="${SP_FOLDER}"
+		getExt
+		PARAMS="--ext ${EXT} "
+		getParams
+		runMetric
 	done
 done
-
+fi

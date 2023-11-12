@@ -1,21 +1,21 @@
 #! /bin/bash
 
+if [ "$#" -lt 3 ]; then
+    echo "Illegal number of parameters"
+else
+
 ####################################
 ####### MANDATORY PARAMETERS
 
-# Eval a superpixel segmentation using an evaluation measure
+# Evals a superpixel segmentation after enforcing connectivity.
+# (from the output folder of run_enforceConnectivity.sh)
 
-# datasets
-declare -a DATASETS=("Birds" "Sky" "NYUV2" "Insetcs" "ECSSD")
+METHOD_NAME=$1		# Name of the method
+MEASURE_NAME=$2		# Name of the evaluation measure. Use one of the following: "BR" "UE" "SIRS" "EV" "CO" "Connectivity" "SuperpixelNumber"
+DS_NAME=$3				# Name of the dataset
 
 # number of superpixels
 declare -a SUPERPIXELS=("25" "50" "75" "100" "200" "300" "400" "500" "600" "700" "800" "900" "1000")
-
-# superpixel methods
-declare -a METHODS=("AINET" "CRS" "DAL-HERS" "DISF" "DRW" "ERGC" "ERS" "ETPS" "GMMSP" "GRID" "IBIS" "ISF" "LNSNet" "LSC" "ODISF" "RSS" "SCALP" "SEEDS" "SH" "SICLE" "SIN" "SLIC" "SNIC" "SSFCN")
-
-# evaluation measures
-declare -a MEASURES=("BR" "UE" "SIRS" "EV" "CO" "Connectivity" "SuperpixelNumber")
 
 SCRIPTS_PATH="Scripts/Evaluation" # Path to this file
 DATASET_DIR="../../datasets/" # Path to the datasets
@@ -24,19 +24,23 @@ RESULTS_DIR="../../RESULTS/" # Path to the results
 IMG_FOLDER="images" # folder name in DATASET_DIR to the original images
 GT_FOLDER="gt"			# folder name in DATASET_DIR to the ground truth images
 
-SEGM_RESULTS_DIR="${RESULTS_DIR}/Segm" # folder of the superpixel segmentation images
-EVAL_RESULTS_DIR="${RESULTS_DIR}/Eval" # folder of the output file(s)
+SEGM_RESULTS_DIR="${RESULTS_DIR}/Segm/SuperpixelNumber_Images/" # folder of the superpixel segmentation images (after enforcing connectivity)
+EVAL_RESULTS_DIR="${RESULTS_DIR}/Eval/EnforcedConnectivity/" # folder of the output file(s)
 
 ####################################
 ####### OPTIONAL PARAMETERS
-SAVE_SCORES=1							# txt file with evaluated results (for each image)
+SAVE_SCORES=1				# txt file with evaluated results (for each image)
 SAVE_OVERALL_SCORES=1			# txt file with overall results
-SAVE_LABELS=0 						# Save image superpixels after enforce coonectivity/minimum number of superpixels. Used in metrics 6 and 7.
+
+SAVE_LABELS=0 				# Save image superpixels after enforce coonectivity/minimum number of superpixels. Used in metrics 6 and 7.
+if [ "$#" -gt 3 ]; then
+    SAVE_LABELS=$4
+fi
 
 ####################################
 ####### OPTIONAL SIRS/EV PARAMETERS
-SAVE_SCORE_IMAGE=0						# Save labeled images whose color map indicates SIRS/EV scores
-DRAW_SCORES=0									# Boolean option when using SAVE_SCORE_IMAGE to show score values
+SAVE_SCORE_IMAGE=0			# Save labeled images whose color map indicates SIRS/EV scores
+DRAW_SCORES=0				# Boolean option when using SAVE_SCORE_IMAGE to show score values
 SAVE_RECONSTRUCTED_IMAGE=0 		# Save the reconstructed image
 
 SCORES_IMAGE_PATH="${RESULTS_DIR}/ScoreImages"
@@ -45,10 +49,10 @@ RECONSTRUCTED_IMAGE_PATH="${RESULTS_DIR}/ReconstructedImages"
 ####################################
 
 runMetric () {
-	PARAMS+="--label ${SEGM_RESULTS_DIR}/${METHOD_NAME}/${DS_NAME}/${superpixels}/ "
+	PARAMS+="--label ${SEGM_RESULTS_DIR}/${METHOD_NAME}/${DS_NAME}/${superpixels} "
 	
 	if [ "$SAVE_SCORES" -eq 1 ] || [ "$SAVE_OVERALL_SCORES" -eq 1 ]; then
-	    SCORES_PATH="${EVAL_RESULTS_DIR}/${METHOD_NAME}/${DS_NAME}/${MEASURE_NAME}"
+	    SCORES_PATH="${EVAL_RESULTS_DIR}${METHOD_NAME}/${DS_NAME}/${MEASURE_NAME}"
 	    mkdir -p ${SCORES_PATH}
 	fi
 	
@@ -65,8 +69,8 @@ runMetric () {
 
 # GET THE LABELED IMAGE EXTENSION
 getExt () {
-	declare -a PGM_METHODS=("CRS" "DAL-HERS" "DISF" "DRW" "ERGC" "ERS" "GMMSP" "GRID" "IBIS" "ISF" "LSC" "ODISF" "RSS" "SEEDS" "SH" "SLIC" "SICLE")
-	declare -a PNG_METHODS=("ETPS" "LNSNet" "SCALP" "SNIC" "AINET" "SIN" "SSFCN")
+	declare -a PGM_METHODS=("CRS" "DAL-HERS" "DISF" "DRW" "ERGC" "ERS" "GMMSP" "GRID" "IBIS" "ISF" "LSC" "ODISF" "RSS" "SEEDS" "SH" "SLIC" "SICLE" "LNSNet")
+	declare -a PNG_METHODS=("ETPS" "SCALP" "SNIC" "AINET" "SIN" "SSFCN")
 	
 	if [[ " ${PGM_METHODS[@]} " =~ " ${METHOD_NAME} " ]]; then
 		EXT="pgm"
@@ -118,8 +122,8 @@ getParams() {
 	fi
 	
 	if ([ "$MEASURE_NAME" = "Connectivity" ] || [ "$MEASURE_NAME" = "SuperpixelNumber" ]) && [ ${SAVE_LABELS} -eq 1 ]; then
-		PARAMS+="--save ${SEGM_RESULTS_DIR}/${MEASURE_NAME}_Images/${METHOD_NAME}/${DS_NAME}/${superpixels} "
-		mkdir -p "${SEGM_RESULTS_DIR}/${MEASURE_NAME}_Images/${METHOD_NAME}/${DS_NAME}/${superpixels}"
+		PARAMS+="--save ${RESULTS_DIR}/${MEASURE_NAME}_Images/${DS_NAME}/${superpixels} "
+		mkdir -p "${RESULTS_DIR}/${MEASURE_NAME}_Images/${DS_NAME}/${superpixels}"
 	fi
 	
 	if [ ${SAVE_SCORE_IMAGE} -eq 1 ] && ( [ "$MEASURE_NAME" = "SIRS" ] || [ "$MEASURE_NAME" = "EV" ] ); then
@@ -135,22 +139,11 @@ getParams() {
 }
     	
 
-for DS_NAME in ${DATASETS[@]}; do
-	echo ""
-	echo ""
-	echo "Dataset:${DS_NAME}"
-	for METHOD_NAME in ${METHODS[@]}; do
-		getExt
-		echo ""
-		echo -n "Method:${METHOD_NAME} "
-		for MEASURE_NAME in ${MEASURES[@]}; do
-			echo "Measure: ${MEASURE_NAME} "
-			for superpixels in ${SUPERPIXELS[@]}; do		
-				PARAMS="--ext ${EXT} "
-				getParams
-				runMetric
-			done
-		done
-	done
+getExt
+echo "Dataset:${DS_NAME} Method:${METHOD_NAME} Measure: ${MEASURE_NAME} "
+for superpixels in ${SUPERPIXELS[@]}; do		
+	PARAMS="--ext ${EXT} "
+	getParams
+	runMetric
 done
-
+fi
