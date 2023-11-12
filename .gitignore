@@ -30,3 +30,7 @@
 *.exe
 *.out
 *.app
+
+# Temporary files/folders
+*/__pycache__/*
+*/.vscode/*
