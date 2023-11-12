@@ -27,6 +27,7 @@ $(BLD)/hers_superpixel.o: builddir \
 
 clean:
 	rm -rf $(BLD)
+	pipenv --rm
 
 help:
 	@echo make '{ module | clean }'
