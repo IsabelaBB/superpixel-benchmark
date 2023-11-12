@@ -31,9 +31,9 @@ def preprocess(image, device="cuda"):
 
     image = color.rgb2lab(image)
 
-    image[:, :, 0] = image[:, :, 0] / np.float(128.0)
-    image[:, :, 1] = image[:, :, 1] / np.float(256.0)
-    image[:, :, 2] = image[:, :, 2] / np.float(256.0)
+    image[:, :, 0] = image[:, :, 0] / float(128.0)
+    image[:, :, 1] = image[:, :, 1] / float(256.0)
+    image[:, :, 2] = image[:, :, 2] / float(256.0)
     
 
     image = torch.from_numpy(image).permute(2, 0, 1).float()[None]
@@ -43,10 +43,16 @@ def preprocess(image, device="cuda"):
         image = image.permute(0, 1, 3, 2)
     h, w = image.shape[-2:]
     #print(h, w)
-    coord = torch.stack(torch.meshgrid(torch.arange( h ), torch.arange(w), indexing='ij')).float()[None]
+    
+    if(int((torch. __version__).split('.')[0]) < 2):
+        coord = torch.stack(torch.meshgrid(torch.arange( h ), torch.arange(w))).float()[None]
+    else:    
+        coord = torch.stack(torch.meshgrid(torch.arange( h ), torch.arange(w), indexing='ij')).float()[None]
+        
+
     #coord = coord / img.shape[-2:
-    coord[:, 0, : , :] = coord[:, 0, : , :] / np.float(h) - 0.5
-    coord[:, 1, : , :] = coord[:, 1, : , :] / np.float(w) - 0.5
+    coord[:, 0, : , :] = coord[:, 0, : , :] / float(h) - 0.5
+    coord[:, 1, : , :] = coord[:, 1, : , :] / float(w) - 0.5
     #print(coord)
     #print(image.shape)
     input = torch.cat([image, coord], 1).to(device)

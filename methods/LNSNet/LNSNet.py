@@ -43,7 +43,7 @@ parser.add_argument('--use_gbl', default=True, help='Using sowm weight update')
 parser.add_argument('--is_dilation', default=True,
                     help='Using dilation convolution')
 parser.add_argument('--check_path', type=str,
-                    default='./lnsn_BSDS_checkpoint.pth.pth')
+                    default='./lnsnet_BSDS_checkpoint.pth')
 
 ################
 
@@ -109,7 +109,7 @@ def runDirectory():
       with open(args.dtime, "a+") as fileTime:
         fileTime.write(img_name + " " + "%.5f" % t + "\n")
   
-  overall_time += t
+    overall_time += t
 
   if (args.time is not None):
     with open(args.time, "a+") as fileTime:

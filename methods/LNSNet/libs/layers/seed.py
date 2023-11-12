@@ -5,6 +5,8 @@ import numpy as np
 
 from libs.utils import *
 
+from math import sqrt
+
 import random
 random.seed(1)
 torch.manual_seed(1)
@@ -32,7 +34,7 @@ class SeedGenerater(nn.Module):
         b, _, h, w = spix.size()
         
         S = h * w / self.sp_num
-        sp_h = np.int32(np.floor(np.sqrt(S) / (w /  np.float(h))))
+        sp_h = np.int32(np.floor(np.sqrt(S) / (w /  float(h))))
         sp_w = np.int32(np.floor(S / np.floor(sp_h)))
         
         
@@ -98,7 +100,7 @@ class SeedGenerater(nn.Module):
         b, _, h, w = spix.size()
         
         S = h * w / self.sp_num
-        sp_h = np.int32(np.floor(np.sqrt(S) / (w /  np.float(h))))
+        sp_h = np.int32(np.floor(sqrt(S) / (w /  float(h))))
         sp_w = np.int32(np.floor(S / np.floor(sp_h)))
         
         ####Choosing the max prob in Grid as Seed#####
