@@ -75,9 +75,9 @@ def runDirectory(args):
             print("ERROR: no image founded")
             return
         
-        if(args.time is not None):
-            with open(args.time, "a+") as fileTime:
-                fileTime.write(str(args.k) + " " + "%.5f" % (overall_time/len(img_files)) + "\n") 
+    if(args.time is not None):
+        with open(args.time, "a+") as fileTime:
+            fileTime.write(str(args.k) + " " + "%.5f" % (overall_time/len(img_files)) + "\n") 
      
 def main():
     args = parse_arguments(sys.argv[1:])
