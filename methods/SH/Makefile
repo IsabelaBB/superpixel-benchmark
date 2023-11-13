@@ -15,9 +15,14 @@ all: module
 builddir:
 	mkdir -p $(BLD)
 
-module: builddir
+pipenv_install:
+	pipenv install
+	#pipenv run pip install cython numpy pillow scikit-image
+	pipenv sync
+	
+module: builddir pipenv_install
 	cp $(addprefix $(SRC)/,$(tocopy)) $(BLD)
-	cd $(BLD); python3 setup.py build_ext --inplace
+	cd $(BLD); pipenv run python3 setup.py build_ext --inplace
 
 $(BLD)/boruvka_superpixel.o: builddir \
 		$(SRC)/boruvka_superpixel.h $(SRC)/boruvka_superpixel.cpp
@@ -25,7 +30,8 @@ $(BLD)/boruvka_superpixel.o: builddir \
 
 clean:
 	rm -rf $(BLD)
-
+	pipenv --rm
+	
 help:
 	@echo make '{ module | clean }'
 
