@@ -1,6 +1,7 @@
 # Superpixel Segmentation Review
 
 ## Intrduction
+
 Superpixel segmentation consists of partitioning images into regions composed of similar and connected
 pixels. Its methods have been widely used in many computer vision applications since it allows for reducing
 the workload, removing redundant information, and preserving regions with meaningful features. Due to
@@ -8,6 +9,7 @@ the rapid progress in this area, the literature fails to catch up on more recent
 ones and to categorize the methods according to all existing strategies. This repository allows to evaluate 20 strategies based on nine criteria: connectivity, compactness, delineation, control over the number of superpixels, color homogeneity, robustness, running time, stability, and visual quality. In [1] we provide a comprehensive review with new taxonomy for superpixel segmentation and revisit the recent and popular literature according to our taxonomy. Our experiments show the trends of each approach in pixel clustering and discuss individual trade-offs. 
 
 ## Superpixel methods
+
 We evaluated 23 superpixel methods (and a grid segmentation baseline) and provided the code for each in this repository in [methods](methods/). Be aware that we have adapted these codes to match our system setup, and the benchmark inputs and outputs. Some of these methods require a saliency map (ODISF and SICLE) or a contour prior map (SCALP) to compute superpixels. In [others](others/) folder, we provide the code of [U-2-Net](https://github.com/xuebinqin/U-2-Net) [2] and [Structured Edge Detection Toolbox](https://github.com/pdollar/edges) [3,4,5] to compute a saliency map and a contour prior map, repectively. Also, DAL-HERS require a pre-trained model available [here]([https://drive.google.com/file/d/14-uaeMAihLdMepfZAth19T1pfZIoMcaE/view?usp=sharing](https://github.com/hankuipeng/DAL-HERS/tree/master)). The following Table presents the reference paper and code of each superpixel method. 
 
 | Method   | Ref. | Code link |
@@ -37,13 +39,41 @@ We evaluated 23 superpixel methods (and a grid segmentation baseline) and provid
 | SSFCN    |[Paper](https://openaccess.thecvf.com/content_CVPR_2020/html/Yang_Superpixel_Segmentation_With_Fully_Convolutional_Networks_CVPR_2020_paper.html)|[SSFCN](https://github.com/fuy34/superpixel_fcn)|
 
 ## Datasets
+
 We selected five datasets which impose different challenges for superpixel segmentation:
 [Birds](https://doi.org/10.1109/SIBGRAPI.2016.047) [6]; [Insects](https://doi.org/10.1109/SIBGRAPI.2016.047) [6]; [Sky](https://doi.org/10.1109/SIBGRAPI.2015.20) [7]; and [ECSSD](https://doi.org/10.1109/TPAMI.2015.2465960) [8]; [NYUV2](https://doi.org/10.1007/978-3-642-33715-4_54) [9]. Birds has 150 natural images of birds with thin and elongated objects’ parts. Similarly, Insects has 130 images of invertebrates with less texture on background regions. Sky has 60 images for sky segmentation with large homogeneous regions with subtle luminosity variations. The Extended Complex Scene Saliency Dataset (ECSSD) is composed of 1000 images with objects and backgrounds whose textures are complex. Finally, the NYUV2 dataset is composed of 1449 video sequences from several indoor scenes recorded by Microsoft Kinect. 
 
 ## Evaluation measures
+
 We assess connectivity, compactness, delineation, color homogeneity, robustness, running time, stability, control over the number of superpixels, and visual quality in superpixel segmentation methods. This repository contais our evaluation code ([evaluation](evaluation/README.md)) with five superpixel evaluation measures: Similarity between Image and Reconstruction from Superpixels (SIRS) [1], Boundary Recall (BR) [10], Explained Variation (EV) [11], Undersegmentation Error (UE) [12], and Compactness (CO) [13]. In addition, we provide code to assess running time, control over the number of superpixels, connectivity, and robustness. 
 
+## Requirements
+
+Please make sure your system have the following packages:
+
+- OpenMP
+- OpenCV 4.5
+- CMake
+- Python 3
+- Pipenv
+- Cuda (only for deep-based strategies)
+- Boost library: `sudo apt install libboost-all-dev`
+
+This project was developed under Ubuntu operational system; therefore, it is NOT GUARANTEED to work properly in other systems (e.g. Windows and macOS).
+
+## Installing cuda on ubuntu
+
+Cuda and the python pakages torch, torchvision, and torchaudio are required for the deep-based strategies. In ubuntu systems, the following instruction may help:
+
+1) `pipenv install`
+2) Run `nvidia-smi` and copy the cuda version
+2) Run `pipenv shell`
+3) Find your version in https://pytorch.org/get-started/previous-versions
+4) Run the following command with your version. Example for cuda 10.1: `pip install ==1.8.1+cu101 torchvision==0.9.1+cu101 torchaudio==0.8.1 -f https://download.pytorch.org/whl/cu101/torch_stable.html`
+5) Test whether the installed version foud the cuda driver: `python3 -c "import torch; print(torch.cuda.is_available())"`
+
 ## Compiling and Running
+
 - To **compile** all files: `bash make.sh`
   - Every method that needs an executable file contains a _Makefile_ in its folder. `make.sh` just call each one and call the Makefile in evaluation folder.
 - [Scripts](Scripts/) has bash and python scripts to run saliency/contour maps ([others](Scripts/others/)), segmentation ([Segmentation](Scripts/Segmentation/)), and evaluation ([Evaluation](Scripts/Evaluation/)).
@@ -60,8 +90,24 @@ We assess connectivity, compactness, delineation, color homogeneity, robustness,
   - Run `bash run_eval_robustness.sh` ([run_eval.sh](Scripts/Evaluation/run_eval_robustness.sh)) to assess BR, UE, SIRS, EV, CO, superpiixel connectivity, and the control over the superpixel number in the noised images.
   - Run `python3 eval_stability.py` ([eval_stability.py](Scripts/Evaluation/eval_stability.py)) to assess the stability of superpixel evaluation.
 
+# System specifications
+
+This code was implemented and evaluated in computers with the following specifications:
+
+1. All methods:
+   - Operational System: Ubuntu 22.04
+   - CPU: Intel® Core™ i5-7200U CPU @ 2.50GHz × 4
+   - Memory: 24GB RAM
+   - GPU: NVIDIA GeForce 920MX with 2GB RAM
+
+2. Only AINET, DAL-HERS, SIN, and SSFCN:
+   - Operational System: Ubuntu 16.04
+   - CPU: Intel® Core™ i7-8700 @ 3.20GHz x 12
+   - Memory: 31GB RAM
+   - GPU: Nvidia GeForce GTX 1080 with 8GB RAM.
 
 ## References
+
 [1] Isabela B Barcelos, Felipe De C Belém, Leonardo De M João, Alexandre X Falcão, and Guimarães Silvio JF. 2022. Improving color homogeneity measure in superpixel segmentation assessment. In 2022 35th SIBGRAPI Conference on Graphics, Patterns and Images (SIBGRAPI), Vol. 1. 79–84. https://doi.org/10.1109/SIBGRAPI55357.2022.9991772.
 
 [2] QIN, Xuebin et al. U2-Net: Going deeper with nested U-structure for salient object detection. Pattern recognition, v. 106, p. 107404, 2020.
