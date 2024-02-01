@@ -6,7 +6,7 @@ Superpixel segmentation consists of partitioning images into regions composed of
 
 ## Superpixel methods
 
-We evaluated 23 superpixel methods (and a grid segmentation baseline) and provided the code for each in this repository in [methods](methods/). Be aware that we have adapted these codes to match our system setup, and the benchmark inputs and outputs. Some of these methods require a saliency map (ODISF and SICLE) or a contour prior map (SCALP) to compute superpixels. In [others](others/) folder, we provide the code of [U-2-Net](https://github.com/xuebinqin/U-2-Net) [2] and [Structured Edge Detection Toolbox](https://github.com/pdollar/edges) [3,4,5] to compute a saliency map and a contour prior map, repectively. Also, DAL-HERS require a pre-trained model available [here](https://drive.google.com/file/d/14-uaeMAihLdMepfZAth19T1pfZIoMcaE/view?usp=sharing). The following Table presents the reference paper and code of each superpixel method. 
+We evaluated 23 superpixel methods (and a grid segmentation baseline) and provided the code for each in this repository in [methods](methods/). Be aware that we have adapted these codes to match our system setup, and the benchmark inputs and outputs. Some of these methods require a saliency map (ODISF and SICLE) or a contour prior map (SCALP) to compute superpixels. In [others](others/) folder, we provide the code of [U-2-Net](https://github.com/xuebinqin/U-2-Net) [2] and [Structured Edge Detection Toolbox](https://github.com/pdollar/edges) [3,4,5] to compute a saliency map and a contour prior map, repectively. The following Table presents the reference paper and code of each superpixel method. 
 
 | Method   | Ref. | Code link |
 |----------|------|-----------|
