@@ -2,11 +2,7 @@
 
 ## Intrduction
 
-Superpixel segmentation consists of partitioning images into regions composed of similar and connected
-pixels. Its methods have been widely used in many computer vision applications since it allows for reducing
-the workload, removing redundant information, and preserving regions with meaningful features. Due to
-the rapid progress in this area, the literature fails to catch up on more recent works among the compared
-ones and to categorize the methods according to all existing strategies. This repository allows to evaluate 20 strategies based on nine criteria: connectivity, compactness, delineation, control over the number of superpixels, color homogeneity, robustness, running time, stability, and visual quality. In [1] we provide a comprehensive review with new taxonomy for superpixel segmentation and revisit the recent and popular literature according to our taxonomy. Our experiments show the trends of each approach in pixel clustering and discuss individual trade-offs. 
+Superpixel segmentation consists of partitioning images into regions composed of similar and connected pixels. Its methods have been widely used in many computer vision applications since it allows for reducing the workload, removing redundant information, and preserving regions with meaningful features. Due to the rapid progress in this area, the literature fails to catch up on more recent works among the compared ones and to categorize the methods according to all existing strategies. This repository allows to evaluate 20 strategies based on nine criteria: connectivity, compactness, delineation, control over the number of superpixels, color homogeneity, robustness, running time, stability, and visual quality. In [1] we provide a comprehensive review with new taxonomy for superpixel segmentation and revisit the recent and popular literature according to our taxonomy. Our experiments show the trends of each approach in pixel clustering and discuss individual trade-offs. 
 
 ## Superpixel methods
 
@@ -105,6 +101,30 @@ This code was implemented and evaluated in computers with the following specific
    - CPU: Intel® Core™ i7-8700 @ 3.20GHz x 12
    - Memory: 31GB RAM
    - GPU: Nvidia GeForce GTX 1080 with 8GB RAM.
+
+## Acknowledgements
+
+The authors thank the Conselho Nacional de Desenvolvimento Científico e Tecnológico – CNPq – (Universal 407242/2021-0, PQ 303808/2018-7, 310075/2019-0), the Fundação de Amparo a Pesquisa do Estado de Minas Gerais – FAPEMIG – (PPM-00006-18), the Fundação de Amparo a Pesquisa do Estado de São Paulo – FAPESP – (2014/12236-1) and the Coordenação de Aperfeiçoamento de Pessoal de Nível Superior (COFECUB 88887.191730/2018-00 and Finance code 001) for the financial support.
+
+## Contact
+
+If you have any questions or faced an unexpected behavior (_e.g._ bugs) or sugestions, please feel free to contact through the following email address: [isabela.borlido@sga.pucminas.br](mailto:isabela.borlido@sga.pucminas.br)
+
+## Cite
+If this work was useful for your research, please cite our paper:
+
+```
+@article{barcelos2024review,
+  title={A comprehensive review and new taxonomy on superpixel segmentation},
+  author={Barcelos, Isabela B. and Bel{\'e}m, Felipe C. and Jo{\~a}o, Leonardo de M. and do Patroc{\'\i}nio Jr, Zenilton K. G. and Falc{\~a}o, Alexandre X. and Guimar{\~a}es, Silvio J. F.},
+  journal={ACM computing surveys (csur)},
+  volume={56},
+  number={6},
+  pages={1--60},
+  year={2024},
+  publisher={ACM New York, NY, USA}
+}
+```
 
 ## References
 
