@@ -90,7 +90,7 @@ Cuda and the python pakages torch, torchvision, and torchaudio are required for 
   - Run `bash run_eval_robustness.sh` ([run_eval.sh](Scripts/Evaluation/run_eval_robustness.sh)) to assess BR, UE, SIRS, EV, CO, superpiixel connectivity, and the control over the superpixel number in the noised images.
   - Run `python3 eval_stability.py` ([eval_stability.py](Scripts/Evaluation/eval_stability.py)) to assess the stability of superpixel evaluation.
 
-# System specifications
+## System specifications
 
 This code was implemented and evaluated in computers with the following specifications:
 
