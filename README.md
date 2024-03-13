@@ -114,15 +114,18 @@ If you have any questions or faced an unexpected behavior (_e.g._ bugs) or suges
 If this work was useful for your research, please cite our paper:
 
 ```
-@article{barcelos2024review,
-  title={A comprehensive review and new taxonomy on superpixel segmentation},
-  author={Barcelos, Isabela B. and Bel{\'e}m, Felipe C. and Jo{\~a}o, Leonardo de M. and do Patroc{\'\i}nio Jr, Zenilton K. G. and Falc{\~a}o, Alexandre X. and Guimar{\~a}es, Silvio J. F.},
-  journal={ACM computing surveys (csur)},
-  volume={56},
-  number={6},
-  pages={1--60},
-  year={2024},
-  publisher={ACM New York, NY, USA}
+@article{10.1145/3652509,
+author = {Barcelos, Isabela Borlido and Bel\'{e}m, Felipe de Castro and Jo\~{a}o, Leonardo de Melo and Jr., Zenilton K. G. do Patroc\'{\i}nio and Falc\~{a}o, Alexandre Xavier and Guimar\~{a}es, Silvio Jamil Ferzoli},
+title = {A comprehensive review and new taxonomy on superpixel segmentation},
+year = {2024},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+issn = {0360-0300},
+url = {https://doi.org/10.1145/3652509},
+doi = {10.1145/3652509},
+note = {Just Accepted},
+journal = {ACM Comput. Surv.},
+month = {mar}
 }
 ```
 
