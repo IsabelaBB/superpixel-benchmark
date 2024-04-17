@@ -109,7 +109,7 @@ getParams() {
 	    PARAMS+="--k ${superpixels} "
 	fi
 	
-	PARAMS+="--metric ${MEASURE_NUM} "
+	PARAMS+="--eval ${MEASURE_NUM} "
 	
 	if [ "$MEASURE_NAME" = "SIRS" ] || [ "$MEASURE_NAME" = "EV" ] || [ "$MEASURE_NAME" = "SuperpixelNumber" ]; then
 		PARAMS+="--img ${DATASET_DIR}/${DS_NAME}/${IMG_FOLDER} "
