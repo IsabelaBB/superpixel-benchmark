@@ -1206,7 +1206,7 @@ double computeBoundaryRecall(iftImage *labels, iftImage *gt, float d)
                 {
                     for (int l = max(0, j - r); l < min(W - 1, j + r) + 1; l++)
                     {
-                        if (is4ConnectedBoundaryPixel(labels, i, j))
+                        if (is4ConnectedBoundaryPixel(labels, k, l))
                             pos = true;
                     }
                 }
