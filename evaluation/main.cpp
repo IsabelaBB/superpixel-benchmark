@@ -156,8 +156,7 @@ bool initArgs(Args *args, int argc, char *argv[])
     tickChar = parseArgs(argv, argc, "--thick");
     rgbChar = parseArgs(argv, argc, "--rgb");
     distancesChar = parseArgs(argv, argc, "--distances");
-    printf("parseargs:%s \n", parseArgs(argv, argc, "--distances"));
-
+    
     if (strcmp(args->saveLabels, "-") == 0)
         args->saveLabels = NULL;
 
@@ -682,14 +681,6 @@ void RBD(iftImage *image, iftImage *labels, int label, int nbuckets, int *alpha,
                     bin = floor(((float)image->Cr[i] / 255.0) * nbuckets);
             }
             hist_id--;
-
-            if (hist_id < 0 || hist_id > 6)
-                printf(">> hist_id:%d \n", hist_id);
-            if (bin < 0 || bin > nbuckets)
-                printf(">> bin:%d \n", bin);
-            if (hist_id * nbuckets + bin < 0 || hist_id * nbuckets + bin > num_histograms * nbuckets)
-                printf(">> hist_id * nbuckets + bin:%d \n", hist_id * nbuckets + bin);
-
             V[hist_id * nbuckets + bin]++;
             ColorHistogram[hist_id][bin][0] += (long int)image->val[i];
             ColorHistogram[hist_id][bin][1] += (long int)image->Cb[i];
@@ -1246,7 +1237,7 @@ double computeUndersegmentationError(iftImage *labels, iftImage *gt)
     gt_segments++;
 
     superpixel_sizes = (int *)calloc(superpixels, sizeof(int));
-    gt_sizes = (int *)calloc(superpixels, sizeof(int));
+    gt_sizes = (int *)calloc(gt_segments, sizeof(int));
 
     intersection_matrix = (int **)malloc(gt_segments * sizeof(int *));
     for (int i = 0; i < gt_segments; ++i)
