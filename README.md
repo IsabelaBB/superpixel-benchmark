@@ -54,6 +54,8 @@ Please make sure your system have the following packages:
 - Pipenv
 - Cuda (only for deep-based strategies)
 - Boost library: `sudo apt install libboost-all-dev`
+- Glog library: `sudo apt install libgoogle-glog-dev`
+- Install Curl SSL: `libcurl4-openssl-dev`
 
 This project was developed under Ubuntu operational system; therefore, it is NOT GUARANTEED to work properly in other systems (e.g. Windows and macOS).
 
