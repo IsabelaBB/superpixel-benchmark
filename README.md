@@ -53,9 +53,10 @@ Please make sure your system have the following packages:
 - Python 3
 - Pipenv
 - Cuda (only for deep-based strategies)
-- Boost library: `sudo apt install libboost-all-dev`
-- Glog library: `sudo apt install libgoogle-glog-dev`
-- Install Curl SSL: `libcurl4-openssl-dev`
+- Boost library: `apt-get install libboost-all-dev`
+- Glog library: `apt-get install libgoogle-glog-dev`
+- Install Curl SSL: `apt-get install libcurl4-openssl-dev`
+- CImg: `apt-get install cimg-dev`
 
 This project was developed under Ubuntu operational system; therefore, it is NOT GUARANTEED to work properly in other systems (e.g. Windows and macOS).
 
